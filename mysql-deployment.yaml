@@ -44,9 +44,9 @@ spec:
         app: wordpress
         tier: mysql
     spec:
+      nodeSelector:
+        pool: db-pool
       containers:
-        nodeSelector:
-          pool: db-pool
       - image: djspears/panw:wordpress-mysql
         name: mysql
         env:
