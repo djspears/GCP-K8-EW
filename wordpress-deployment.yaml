@@ -1,21 +1,18 @@
-#Paste the following yaml configuration
 apiVersion: v1
 kind: Service
 metadata:
- name: wordpress
- namespace: default
-labels:
+  name: wordpress
+  annotations:
+    cloud.google.com/load-balancer-type: "Internal"
+  labels:
     app: wordpress
 spec:
- type: LoadBalancer
- ports:
- - port: 80
-   protocol: TCP
-   targetPort: 80
- selector:
-   app: wordpress
-   tier: frontend
- loadBalancerIP: 10.0.10.11
+  ports:
+    - port: 80
+  selector:
+    app: wordpress
+    tier: frontend
+  type: LoadBalancer
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
